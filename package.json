@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/ astro build",
-    "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/compositesanwichpanels/ astro build"
+    "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/thermalsandwichpanels/ astro build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
