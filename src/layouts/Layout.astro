@@ -1,0 +1,278 @@
+---
+import { ClientRouter } from "astro:transitions";
+import type { TranslationKeys } from "../i18n/en";
+import type { Lang } from "../i18n/utils";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import ScrollReveal from "../components/ui/ScrollReveal.astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  alternateURL?: string;
+}
+
+const {
+  t,
+  lang,
+  title = "Thermal Sandwich Panels | Efficient & Sustainable Construction",
+  description = "Ultimate buyer's guide to thermal sandwich panels. Learn about benefits, compare insulation materials (PIR, EPS, Rockwool), and choose the perfect thickness for maximum energy savings.",
+  canonicalURL = Astro.url.href,
+  alternateURL,
+} = Astro.props;
+
+const alternateLang = lang === "en" ? "es" : "en";
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang={lang} href={canonicalURL} />
+    {alternateURL && (
+      <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+    )}
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === "en" ? "en_US" : "es_ES"} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <ClientRouter />
+  </head>
+  <body>
+    <Navbar t={t} lang={lang} />
+    <slot />
+
+    <style is:global>
+      /* ── CSS Variables ── */
+      :root {
+        /* Colors */
+        --color-primary: #1e3a8a;
+        --color-primary-mid: #1d4ed8;
+        --color-primary-light: #e0effe;
+        --color-primary-xlight: #f0f7ff;
+        --color-accent: #f97316;
+        --color-accent-dark: #ea580c;
+        --color-white: #ffffff;
+        --color-black: #000000;
+
+        /* Neutrals */
+        --color-slate-50: #f8fafc;
+        --color-slate-100: #f1f5f9;
+        --color-slate-200: #e2e8f0;
+        --color-slate-300: #cbd5e1;
+        --color-slate-400: #94a3b8;
+        --color-slate-500: #64748b;
+        --color-slate-600: #475569;
+        --color-slate-700: #334155;
+        --color-slate-800: #1e293b;
+        --color-slate-900: #0f172a;
+        --color-slate-950: #020617;
+
+        /* Typography */
+        --font-sans: "Inter", sans-serif;
+        --font-heading: "Poppins", sans-serif;
+
+        --text-xs: 0.75rem;
+        --text-sm: 0.875rem;
+        --text-base: 1rem;
+        --text-lg: 1.125rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.5rem;
+        --text-3xl: 1.875rem;
+        --text-4xl: 2.25rem;
+        --text-5xl: 3rem;
+
+        --font-light: 300;
+        --font-normal: 400;
+        --font-medium: 500;
+        --font-semibold: 600;
+        --font-bold: 700;
+        --font-extrabold: 800;
+
+        /* Spacing */
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-16: 4rem;
+        --space-20: 5rem;
+        --space-24: 6rem;
+        --space-28: 7rem;
+
+        /* Border Radius */
+        --radius-sm: 0.375rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+        --radius-2xl: 1.5rem;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+        /* Transitions */
+        --transition-fast: 150ms ease;
+        --transition-base: 200ms ease;
+        --transition-slow: 300ms ease;
+
+        /* Container */
+        --container-max: 80rem;
+        --container-px: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        :root {
+          --container-px: 1.5rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        :root {
+          --container-px: 2rem;
+        }
+      }
+
+      /* ── Reset & Base ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        font-size: var(--text-base);
+        color: var(--color-slate-800);
+        background-color: var(--color-slate-50);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        cursor: pointer;
+        font-family: inherit;
+        border: none;
+        background: none;
+      }
+
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+      }
+
+      /* ── Utility Classes ── */
+      .container {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        padding-inline: var(--container-px);
+      }
+
+      .section-label {
+        display: block;
+        font-size: var(--text-xs);
+        font-weight: var(--font-bold);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-accent);
+      }
+
+      .accent-line::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: var(--color-accent);
+        margin-top: 10px;
+        border-radius: 2px;
+      }
+
+      .accent-line-center::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: var(--color-accent);
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
+
+      /* ── Reveal Animation ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.4s; }
+      .reveal-delay-5 { transition-delay: 0.5s; }
+      .reveal-delay-6 { transition-delay: 0.6s; }
+    </style>
+  </body>
+</html>

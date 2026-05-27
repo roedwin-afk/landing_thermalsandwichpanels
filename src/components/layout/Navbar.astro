@@ -1,0 +1,258 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import NavLinks from "../ui/NavLinks.astro";
+import MobileMenu from "./MobileMenu.astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+---
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar__inner">
+
+      <!-- Logo -->
+      <a href="#inicio" class="navbar__logo">
+        <div class="navbar__logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-7H4a2 2 0 0 0-2 2v17z"/>
+            <path d="M14 2v6h6"/>
+            <path d="M12 18v-6"/>
+            <path d="M8 18v-1"/>
+            <path d="M16 18v-3"/>
+          </svg>
+        </div>
+        <div class="navbar__logo-text">
+          <span class="navbar__logo-name">THERMAL</span>
+          <span class="navbar__logo-sub">Sandwich Panels</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="navbar__nav" aria-label="Main navigation">
+        <NavLinks t={t} lang={lang} orientation="horizontal" />
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="navbar__actions">
+        <a href="#contacto" class="btn btn--primary">
+          {t.nav.cta}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="navbar__burger"
+        id="burger-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<MobileMenu t={t} lang={lang} />
+
+<script>
+  function initNavbar() {
+    const navbar = document.getElementById("navbar");
+    const burgerBtn = document.getElementById("burger-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    // Sticky scroll effect
+    window.addEventListener("scroll", () => {
+      if (!navbar) return;
+      if (window.scrollY > 50) {
+        navbar.classList.add("navbar--scrolled");
+      } else {
+        navbar.classList.remove("navbar--scrolled");
+      }
+    });
+
+    // Burger toggle
+    burgerBtn?.addEventListener("click", () => {
+      const isOpen = mobileMenu?.classList.contains("mobile-menu--open");
+      if (isOpen) {
+        mobileMenu?.classList.remove("mobile-menu--open");
+        burgerBtn.setAttribute("aria-expanded", "false");
+        burgerBtn.classList.remove("burger--open");
+      } else {
+        mobileMenu?.classList.add("mobile-menu--open");
+        burgerBtn.setAttribute("aria-expanded", "true");
+        burgerBtn.classList.add("burger--open");
+      }
+    });
+  }
+
+  // Run on first load and after view transitions
+  initNavbar();
+  document.addEventListener("astro:page-load", initNavbar);
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    z-index: 50;
+    transition: box-shadow var(--transition-slow), padding var(--transition-slow);
+  }
+
+  .navbar--scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+    gap: var(--space-6);
+  }
+
+  /* Logo */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-icon {
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    padding: 0.625rem;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar__logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar__logo-name {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: var(--text-xl);
+    letter-spacing: -0.025em;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .navbar__logo-sub {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-top: -2px;
+  }
+
+  /* Desktop nav */
+  .navbar__nav {
+    display: none;
+  }
+
+  /* CTA */
+  .navbar__actions {
+    display: none;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-lg);
+    transition: background-color var(--transition-base), transform var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .btn--primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn--primary:hover {
+    background-color: #1e40af;
+  }
+
+  /* Burger */
+  .navbar__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-base);
+  }
+
+  .navbar__burger:hover {
+    background-color: var(--color-slate-100);
+  }
+
+  .burger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-slate-700);
+    border-radius: 2px;
+    transition: transform var(--transition-slow), opacity var(--transition-slow);
+    transform-origin: center;
+  }
+
+  .burger--open .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .burger--open .burger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .burger--open .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Desktop breakpoint */
+  @media (min-width: 768px) {
+    .navbar__nav {
+      display: flex;
+    }
+
+    .navbar__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .navbar__burger {
+      display: none;
+    }
+  }
+</style>

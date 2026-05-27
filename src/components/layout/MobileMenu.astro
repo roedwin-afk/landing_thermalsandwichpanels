@@ -1,0 +1,110 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import NavLinks from "../ui/NavLinks.astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+---
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu__inner">
+
+    <nav aria-label="Mobile navigation">
+      <NavLinks t={t} lang={lang} orientation="vertical" />
+    </nav>
+
+    <div class="mobile-menu__footer">
+      <a href="#contacto" class="mobile-menu__cta">
+        {t.nav.cta}
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function initMobileMenu() {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const links = mobileMenu?.querySelectorAll("a");
+
+    // Close menu when any link is clicked
+    links?.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu?.classList.remove("mobile-menu--open");
+        mobileMenu?.setAttribute("aria-hidden", "true");
+
+        const burgerBtn = document.getElementById("burger-btn");
+        burgerBtn?.setAttribute("aria-expanded", "false");
+        burgerBtn?.classList.remove("burger--open");
+      });
+    });
+  }
+
+  initMobileMenu();
+  document.addEventListener("astro:page-load", initMobileMenu);
+</script>
+
+<style>
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-slate-100);
+    box-shadow: var(--shadow-lg);
+    z-index: 49;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--transition-slow) ease;
+  }
+
+  .mobile-menu--open {
+    max-height: 100vh;
+  }
+
+  .mobile-menu__inner {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .mobile-menu__footer {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-slate-100);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .mobile-menu__cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color var(--transition-base);
+  }
+
+  .mobile-menu__cta:hover {
+    background-color: var(--color-accent-dark);
+  }
+
+  /* Only show on mobile */
+  @media (max-width: 767px) {
+    .mobile-menu {
+      display: block;
+    }
+  }
+</style>
