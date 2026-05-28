@@ -1,5 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/sections/Hero.astro";
+import What from "../../components/sections/What.astro";
+import Benefits from "../../components/sections/Benefits.astro";
+import Guide from "../../components/sections/Guide.astro";
+import Comparison from "../../components/sections/Comparison.astro";
+import Trust from "../../components/sections/Trust.astro";
+import Faq from "../../components/sections/Faq.astro";
 import { getLang, useTranslations, getAlternatePath } from "../../i18n/utils";
 
 const base = import.meta.env.BASE_URL;
@@ -9,5 +16,11 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
 ---
 
 <Layout t={t} lang={lang} alternateURL={alternateURL}>
-  <!-- Sections will go here -->
+  <Hero t={t} lang={lang} />
+  <What t={t} lang={lang} />
+  <Benefits t={t} lang={lang} />
+  <Guide t={t} lang={lang} />
+  <Comparison t={t} lang={lang} />
+  <Trust t={t} lang={lang} />
+  <Faq t={t} lang={lang} />
 </Layout>

@@ -1,0 +1,244 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const articles = [
+  {
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+    alt: "Roof panel thickness guide",
+    tag: t.guide.article1Tag,
+    title: t.guide.article1Title,
+    text: t.guide.article1Text,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80",
+    alt: "Insulated polyurethane foam details",
+    tag: t.guide.article2Tag,
+    title: t.guide.article2Title,
+    text: t.guide.article2Text,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+    alt: "Sustainable residential housing",
+    tag: t.guide.article3Tag,
+    title: t.guide.article3Title,
+    text: t.guide.article3Text,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80",
+    alt: "Eco building and sustainability concepts",
+    tag: t.guide.article4Tag,
+    title: t.guide.article4Title,
+    text: t.guide.article4Text,
+  },
+];
+---
+
+<section id="guia" class="guide">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="guide__header">
+      <div class="reveal">
+        <span class="section-label">{t.guide.label}</span>
+        <h2 class="guide__title accent-line">{t.guide.title}</h2>
+      </div>
+      <p class="guide__description reveal reveal-delay-1">{t.guide.description}</p>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="guide__grid">
+      {articles.map((article, i) => (
+        <article class={`guide__card reveal reveal-delay-${i + 1}`}>
+          <div class="guide__card-image">
+            <img
+              src={article.img}
+              alt={article.alt}
+              loading="lazy"
+            />
+            <span class="guide__card-tag">{article.tag}</span>
+          </div>
+          <div class="guide__card-body">
+            <div>
+              <h3 class="guide__card-title">{article.title}</h3>
+              <p class="guide__card-text">{article.text}</p>
+            </div>
+            <button class="guide__card-link">
+              {t.guide.readMore}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .guide {
+    padding-block: var(--space-20);
+    background-color: var(--color-white);
+  }
+
+  @media (min-width: 1024px) {
+    .guide {
+      padding-block: var(--space-28);
+    }
+  }
+
+  /* Header */
+  .guide__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .guide__header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .guide__title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: var(--text-3xl);
+    color: var(--color-slate-900);
+    margin-top: var(--space-2);
+    max-width: 32rem;
+  }
+
+  .guide__description {
+    color: var(--color-slate-500);
+    font-size: var(--text-sm);
+    max-width: 24rem;
+    line-height: 1.7;
+  }
+
+  /* Grid */
+  .guide__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .guide__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .guide__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Card */
+  .guide__card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-slate-100);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-slow);
+  }
+
+  .guide__card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Card Image */
+  .guide__card-image {
+    position: relative;
+    height: 12rem;
+    background-color: var(--color-slate-200);
+    flex-shrink: 0;
+  }
+
+  .guide__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .guide__card-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Card Body */
+  .guide__card-body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: var(--space-5);
+  }
+
+  .guide__card-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    color: var(--color-slate-900);
+    line-height: 1.4;
+    transition: color var(--transition-base);
+  }
+
+  .guide__card:hover .guide__card-title {
+    color: var(--color-primary-mid);
+  }
+
+  .guide__card-text {
+    font-size: var(--text-xs);
+    color: var(--color-slate-500);
+    margin-top: var(--space-3);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Read more */
+  .guide__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary-mid);
+    transition: color var(--transition-base);
+    padding: 0;
+  }
+
+  .guide__card-link:hover {
+    color: var(--color-accent);
+  }
+</style>

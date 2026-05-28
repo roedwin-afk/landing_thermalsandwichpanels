@@ -1,0 +1,388 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import { Layers, Linkedin, Twitter, Facebook, Send, Leaf } from "lucide-astro";
+
+const year = new Date().getFullYear();
+
+interface Props {
+    t: TranslationKeys;
+    lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+---
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <!-- Brand Block -->
+            <div class="footer__brand">
+                <a href="#inicio" class="footer__logo">
+                    <div class="footer__logo-icon">
+                        <Layers size={14} />
+                    </div>
+                    <span class="footer__logo-name">THERMAL</span>
+                </a>
+                <p class="footer__description">{t.footer.description}</p>
+                <div class="footer__social">
+                    <a
+                        href="#"
+                        class="footer__social-link"
+                        aria-label="LinkedIn"
+                    >
+                        <Linkedin size={16} />
+                    </a>
+                    <a
+                        href="#"
+                        class="footer__social-link"
+                        aria-label="Twitter"
+                    >
+                        <Twitter size={16} />
+                    </a>
+                    <a
+                        href="#"
+                        class="footer__social-link"
+                        aria-label="Facebook"
+                    >
+                        <Facebook size={16} />
+                    </a>
+                </div>
+            </div>
+
+            <!-- Info Links -->
+            <div class="footer__nav">
+                <span class="footer__nav-title">{t.footer.infoTitle}</span>
+                <ul>
+                    <li><a href="#que-es">{t.footer.link1}</a></li>
+                    <li><a href="#beneficios">{t.footer.link2}</a></li>
+                    <li><a href="#guia">{t.footer.link3}</a></li>
+                    <li><a href="#comparativa">{t.footer.link4}</a></li>
+                </ul>
+            </div>
+
+            <!-- Policies Links -->
+            <div class="footer__nav">
+                <span class="footer__nav-title">{t.footer.policiesTitle}</span>
+                <ul>
+                    <li><a href="#">{t.footer.policy1}</a></li>
+                    <li><a href="#">{t.footer.policy2}</a></li>
+                    <li><a href="#">{t.footer.policy3}</a></li>
+                    <li><a href="#contacto">{t.footer.policy4}</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer__newsletter">
+                <span class="footer__nav-title">{t.footer.newsletterTitle}</span
+                >
+                <p class="footer__newsletter-text">{t.footer.newsletterText}</p>
+                <form
+                    class="footer__newsletter-form"
+                    id="newsletter-form"
+                    novalidate
+                >
+                    <div class="footer__newsletter-input-wrap">
+                        <input
+                            type="email"
+                            required
+                            placeholder={t.footer.newsletterPlaceholder}
+                        />
+                        <button type="submit" aria-label="Subscribe">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"
+                                ></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                    <p
+                        class="footer__newsletter-success"
+                        id="newsletter-success"
+                        aria-hidden="true"
+                    >
+                        {t.footer.newsletterSuccess}
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer__bottom">
+            <p>© {year} Thermal Sandwich Panels. {t.footer.copyrightSuffix}</p>
+            <p class="footer__tagline">
+                {t.footer.tagline}
+                <Leaf size={14} color="#22c55e" />
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function initNewsletter() {
+        const form = document.getElementById(
+            "newsletter-form",
+        ) as HTMLFormElement;
+        const success = document.getElementById(
+            "newsletter-success",
+        ) as HTMLElement;
+        if (!form || !success) return;
+
+        const newForm = form.cloneNode(true) as HTMLFormElement;
+        form.parentNode?.replaceChild(newForm, form);
+
+        const newSuccess = newForm.querySelector(
+            "#newsletter-success",
+        ) as HTMLElement;
+
+        newForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (newSuccess) {
+                newSuccess.classList.add("footer__newsletter-success--visible");
+                newSuccess.setAttribute("aria-hidden", "false");
+            }
+            newForm.querySelector("input")!.value = "";
+
+            setTimeout(() => {
+                newSuccess?.classList.remove(
+                    "footer__newsletter-success--visible",
+                );
+                newSuccess?.setAttribute("aria-hidden", "true");
+            }, 4000);
+        });
+    }
+
+    initNewsletter();
+    document.addEventListener("astro:page-load", initNewsletter);
+</script>
+
+<style>
+    .footer {
+        background-color: var(--color-slate-950);
+        color: var(--color-slate-400);
+        padding-top: var(--space-16);
+        padding-bottom: var(--space-8);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Grid */
+    .footer__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+        margin-bottom: var(--space-12);
+    }
+
+    @media (min-width: 768px) {
+        .footer__grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .footer__grid {
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+        }
+    }
+
+    /* Brand */
+    .footer__brand {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .footer__logo {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+    }
+
+    .footer__logo-icon {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--color-accent);
+        padding: 0.5rem;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer__logo-name {
+        font-family: var(--font-heading);
+        font-weight: var(--font-extrabold);
+        font-size: var(--text-lg);
+        color: var(--color-white);
+        letter-spacing: 0.05em;
+    }
+
+    .footer__description {
+        font-size: var(--text-sm);
+        color: var(--color-slate-400);
+        max-width: 20rem;
+        line-height: 1.7;
+    }
+
+    /* Social */
+    .footer__social {
+        display: flex;
+        gap: var(--space-4);
+        padding-top: var(--space-2);
+    }
+
+    .footer__social-link {
+        width: 2rem;
+        height: 2rem;
+        border-radius: var(--radius-lg);
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--color-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--transition-base);
+    }
+
+    .footer__social-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Nav columns */
+    .footer__nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .footer__nav-title {
+        display: block;
+        font-family: var(--font-heading);
+        font-weight: var(--font-semibold);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-white);
+    }
+
+    .footer__nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .footer__nav a {
+        font-size: var(--text-xs);
+        color: var(--color-slate-400);
+        transition: color var(--transition-base);
+    }
+
+    .footer__nav a:hover {
+        color: var(--color-white);
+    }
+
+    /* Newsletter */
+    .footer__newsletter {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .footer__newsletter-text {
+        font-size: var(--text-xs);
+        color: var(--color-slate-400);
+        line-height: 1.6;
+    }
+
+    .footer__newsletter-input-wrap {
+        position: relative;
+        display: flex;
+    }
+
+    .footer__newsletter-input-wrap input {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        padding: 0.625rem 3rem 0.625rem 1rem;
+        font-size: var(--text-xs);
+        color: var(--color-white);
+        outline: none;
+        transition: border-color var(--transition-base);
+    }
+
+    .footer__newsletter-input-wrap input::placeholder {
+        color: var(--color-slate-500);
+    }
+
+    .footer__newsletter-input-wrap input:focus {
+        border-color: var(--color-accent);
+    }
+
+    .footer__newsletter-input-wrap button {
+        position: absolute;
+        right: 0.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-md);
+        transition: background-color var(--transition-base);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer__newsletter-input-wrap button:hover {
+        background-color: var(--color-accent-dark);
+    }
+
+    /* Newsletter success */
+    .footer__newsletter-success {
+        display: none;
+        font-size: var(--text-xs);
+        color: #4ade80;
+        padding-top: var(--space-1);
+    }
+
+    .footer__newsletter-success--visible {
+        display: block;
+    }
+
+    /* Bottom bar */
+    .footer__bottom {
+        padding-top: var(--space-8);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+        text-align: center;
+        font-size: var(--text-xs);
+        color: var(--color-slate-500);
+    }
+
+    @media (min-width: 640px) {
+        .footer__bottom {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+        }
+    }
+
+    .footer__tagline {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+    }
+</style>
