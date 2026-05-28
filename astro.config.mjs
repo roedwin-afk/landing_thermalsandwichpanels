@@ -7,6 +7,7 @@ const BASE = process.env.BASE || "/landing_thermalsandwichpanels/";
 export default defineConfig({
   site: SITE,
   base: BASE,
+  output: "static",
   integrations: [
     sitemap({
       i18n: {
