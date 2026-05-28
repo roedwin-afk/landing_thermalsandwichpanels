@@ -6,9 +6,12 @@ import NavLinks from "../ui/NavLinks.astro";
 interface Props {
   t: TranslationKeys;
   lang: Lang;
+  alternatePath: string;
+  alternateLabel: string;
 }
 
-const { t, lang } = Astro.props;
+const { t, lang, alternatePath, alternateLabel } = Astro.props;
+
 ---
 
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
@@ -23,6 +26,9 @@ const { t, lang } = Astro.props;
         {t.nav.cta}
       </a>
     </div>
+    <a href={alternatePath} class="mobile-menu__lang">
+  {alternateLabel}
+</a>
 
   </div>
 </div>
@@ -101,10 +107,49 @@ const { t, lang } = Astro.props;
     background-color: var(--color-accent-dark);
   }
 
-  /* Only show on mobile */
-  @media (max-width: 767px) {
-    .mobile-menu {
-      display: block;
-    }
+  
+  .mobile-menu__lang {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--color-slate-200);
+  color: var(--color-slate-700);
+  font-weight: var(--font-bold);
+  font-size: var(--text-sm);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.mobile-menu__lang:hover {
+  border-color: var(--color-primary-mid);
+  color: var(--color-primary-mid);
+}
+
+.mobile-menu {
+  display: block;
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-slate-100);
+  box-shadow: var(--shadow-lg);
+  z-index: 49;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-slow) ease;
+  visibility: hidden;
+}
+
+.mobile-menu--open {
+  max-height: 100vh;
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu {
+    display: none;
   }
+}
 </style>

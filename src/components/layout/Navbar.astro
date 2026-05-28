@@ -1,6 +1,8 @@
 ---
+import { Layers } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
+import { getAlternatePath } from "../../i18n/utils";
 import NavLinks from "../ui/NavLinks.astro";
 import MobileMenu from "./MobileMenu.astro";
 
@@ -10,22 +12,19 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const alternatePath = getAlternatePath(Astro.url, base);
+const alternateLabel = lang === "en" ? "ES" : "EN";
 ---
 
 <header class="navbar" id="navbar">
   <div class="container">
     <div class="navbar__inner">
-
       <!-- Logo -->
       <a href="#inicio" class="navbar__logo">
         <div class="navbar__logo-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-7H4a2 2 0 0 0-2 2v17z"/>
-            <path d="M14 2v6h6"/>
-            <path d="M12 18v-6"/>
-            <path d="M8 18v-1"/>
-            <path d="M16 18v-3"/>
-          </svg>
+          <Layers size={20} />
         </div>
         <div class="navbar__logo-text">
           <span class="navbar__logo-name">THERMAL</span>
@@ -40,6 +39,9 @@ const { t, lang } = Astro.props;
 
       <!-- Desktop CTA -->
       <div class="navbar__actions">
+        <a href={alternatePath} class="lang-switch">
+          {alternateLabel}
+        </a>
         <a href="#contacto" class="btn btn--primary">
           {t.nav.cta}
         </a>
@@ -57,13 +59,12 @@ const { t, lang } = Astro.props;
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </button>
-
     </div>
   </div>
 </header>
 
 <!-- Mobile Menu -->
-<MobileMenu t={t} lang={lang} />
+<MobileMenu t={t} lang={lang} alternatePath={alternatePath} alternateLabel={alternateLabel} />
 
 <script>
   function initNavbar() {
@@ -111,7 +112,9 @@ const { t, lang } = Astro.props;
     backdrop-filter: blur(8px);
     box-shadow: var(--shadow-sm);
     z-index: 50;
-    transition: box-shadow var(--transition-slow), padding var(--transition-slow);
+    transition:
+      box-shadow var(--transition-slow),
+      padding var(--transition-slow);
   }
 
   .navbar--scrolled {
@@ -185,7 +188,9 @@ const { t, lang } = Astro.props;
     letter-spacing: 0.08em;
     padding: 0.75rem 1.25rem;
     border-radius: var(--radius-lg);
-    transition: background-color var(--transition-base), transform var(--transition-base);
+    transition:
+      background-color var(--transition-base),
+      transform var(--transition-base);
     white-space: nowrap;
   }
 
@@ -198,6 +203,23 @@ const { t, lang } = Astro.props;
   .btn--primary:hover {
     background-color: #1e40af;
   }
+
+  .lang-switch {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-slate-700);
+  border: 1px solid var(--color-slate-200);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.lang-switch:hover {
+  border-color: var(--color-primary-mid);
+  color: var(--color-primary-mid);
+}
 
   /* Burger */
   .navbar__burger {
@@ -222,7 +244,9 @@ const { t, lang } = Astro.props;
     height: 2px;
     background-color: var(--color-slate-700);
     border-radius: 2px;
-    transition: transform var(--transition-slow), opacity var(--transition-slow);
+    transition:
+      transform var(--transition-slow),
+      opacity var(--transition-slow);
     transform-origin: center;
   }
 

@@ -220,6 +220,7 @@ export const en = {
     copyright:
       "© 2026 Thermal Sandwich Panels. All rights reserved. Designed for optimal thermal conservation.",
     tagline: "Engineered for Efficiency",
+    copyrightSuffix: "All rights reserved. Designed for optimal thermal conservation.",
   },
 } as const;
 

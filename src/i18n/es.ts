@@ -222,5 +222,6 @@ export const es: TranslationKeys = {
     copyright:
       "© 2026 Thermal Sandwich Panels. Todos los derechos reservados. Diseñado para una conservación térmica óptima.",
     tagline: "Ingeniería para la Eficiencia",
+    copyrightSuffix: "Todos los derechos reservados. Diseñado para una conservación térmica óptima."
   },
 };

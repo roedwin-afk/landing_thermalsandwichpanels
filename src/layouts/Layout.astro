@@ -69,8 +69,10 @@ const alternateLang = lang === "en" ? "es" : "en";
     <ClientRouter />
   </head>
   <body>
+    <ScrollReveal />
     <Navbar t={t} lang={lang} />
     <slot />
+    <Footer t={t} lang={lang} />
 
     <style is:global>
       /* ── CSS Variables ── */
