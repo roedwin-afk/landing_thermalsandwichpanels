@@ -1,0 +1,35 @@
+---
+import { BlogPost, Comments, CommentForm } from "astro-blog-kit/components";
+import { createWPClient, getStaticPathsForPosts } from "astro-blog-kit/utils";
+import config from "../../../blog.config";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const wp = createWPClient(config.wpUrl);
+  const posts = await wp.getAllPosts();
+  return getStaticPathsForPosts(posts);
+}
+
+const { post } = Astro.props;
+
+const wp = createWPClient(config.wpUrl);
+const comments = post.id ? await wp.getComments(post.id) : [];
+
+const t = {
+  blog: {
+    tagline: "Our Blog",
+    title_line1: "Latest",
+    title_line2: "Articles",
+    description: "Welcome to our blog.",
+    btncta: "Read more",
+    btn_prev: "Previous",
+    btn_next: "Next",
+  },
+};
+---
+
+<Layout>
+  <BlogPost post={post} t={t} lang={config.locale ?? "en"} />
+  <Comments comments={comments} postId={post.id ?? 0} />
+  <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
+</Layout>
