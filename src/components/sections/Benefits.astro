@@ -1,4 +1,12 @@
 ---
+import {
+  DollarSign,
+  Thermometer,
+  VolumeX,
+  Leaf,
+  Droplets,
+  Layers,
+} from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 
@@ -11,37 +19,37 @@ const { t, lang } = Astro.props;
 
 const benefits = [
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    icon: "dollar",
     title: t.benefits.b1Title,
     text: t.benefits.b1Text,
     accent: true,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>`,
+    icon: "thermometer",
     title: t.benefits.b2Title,
     text: t.benefits.b2Text,
     accent: false,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+    icon: "volume",
     title: t.benefits.b3Title,
     text: t.benefits.b3Text,
     accent: true,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    icon: "leaf",
     title: t.benefits.b4Title,
     text: t.benefits.b4Text,
     accent: false,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
+    icon: "droplets",
     title: t.benefits.b5Title,
     text: t.benefits.b5Text,
     accent: true,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    icon: "layers",
     title: t.benefits.b6Title,
     text: t.benefits.b6Text,
     accent: false,
@@ -51,7 +59,6 @@ const benefits = [
 
 <section id="beneficios" class="benefits">
   <div class="container">
-
     <!-- Header -->
     <div class="benefits__header reveal">
       <span class="section-label">{t.benefits.label}</span>
@@ -61,17 +68,25 @@ const benefits = [
 
     <!-- Cards Grid -->
     <div class="benefits__grid">
-      {benefits.map((benefit, i) => (
-        <div class={`benefits__card reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class={`benefits__card-icon ${benefit.accent ? "benefits__card-icon--accent" : "benefits__card-icon--primary"}`}>
-            <Fragment set:html={benefit.icon} />
+      {
+        benefits.map((benefit, i) => (
+          <div class={`benefits__card reveal reveal-delay-${(i % 3) + 1}`}>
+            <div
+              class={`benefits__card-icon ${benefit.accent ? "benefits__card-icon--accent" : "benefits__card-icon--primary"}`}
+            >
+              {benefit.icon === "dollar" && <DollarSign size={22} />}
+              {benefit.icon === "thermometer" && <Thermometer size={22} />}
+              {benefit.icon === "volume" && <VolumeX size={22} />}
+              {benefit.icon === "leaf" && <Leaf size={22} />}
+              {benefit.icon === "droplets" && <Droplets size={22} />}
+              {benefit.icon === "layers" && <Layers size={22} />}
+            </div>
+            <h3 class="benefits__card-title">{benefit.title}</h3>
+            <p class="benefits__card-text">{benefit.text}</p>
           </div>
-          <h3 class="benefits__card-title">{benefit.title}</h3>
-          <p class="benefits__card-text">{benefit.text}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
-
   </div>
 </section>
 

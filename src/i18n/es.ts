@@ -9,6 +9,7 @@ export const es: TranslationKeys = {
     comparison: "Comparativa",
     faq: "FAQ",
     cta: "Cotización Gratis",
+    blog: "Blog",
   },
   hero: {
     badge: "Eficiencia Energética 2026",

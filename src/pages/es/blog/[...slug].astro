@@ -1,8 +1,8 @@
 ---
 import { BlogPost, Comments, CommentForm } from "astro-blog-kit/components";
 import { createWPClient, getStaticPathsForPosts } from "astro-blog-kit/utils";
-import config from "../../../blog.config";
-import Layout from "../../layouts/Layout.astro";
+import config from "../../../../blog.config";
+import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const wp = createWPClient(config.wpUrl);
@@ -14,8 +14,10 @@ const { post } = Astro.props;
 
 const wp = createWPClient(config.wpUrl);
 const comments = post.id ? await wp.getComments(post.id) : [];
+import { getLang, useTranslations, getAlternatePath } from "../../../i18n/utils";
 
-const t = {
+
+const bt = {
   blog: {
     tagline: "Our Blog",
     title_line1: "Latest",
@@ -26,10 +28,15 @@ const t = {
     btn_next: "Next",
   },
 };
+
+const base = import.meta.env.BASE_URL;
+const lang = getLang(Astro.url, base);
+const t = useTranslations(lang);
+const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
 ---
 
-<Layout>
-  <BlogPost post={post} t={t} lang={config.locale ?? "en"} />
+<Layout t={t} lang={lang} alternateURL={alternateURL}>
+  <BlogPost post={post} t={bt} lang={config.locale ?? "en"} />
   <Comments comments={comments} postId={post.id ?? 0} />
   <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
 </Layout>

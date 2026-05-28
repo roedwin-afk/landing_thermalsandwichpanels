@@ -1,4 +1,5 @@
 ---
+import { Info, Star } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 
@@ -48,7 +49,6 @@ const rows = [
 
 <section id="comparativa" class="comparison">
   <div class="container">
-
     <!-- Header -->
     <div class="comparison__header reveal">
       <span class="section-label">{t.comparison.label}</span>
@@ -70,58 +70,52 @@ const rows = [
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr>
-              <td>
-                <span class="comparison__row-name">{row.name}</span>
-                <span class="comparison__row-sub">{row.sub}</span>
-              </td>
-              <td>
-                <div class="comparison__stars">
-                  {Array.from({ length: 3 }).map((_, i) => (
-                    <svg
-                      class={`comparison__star ${i < row.thermalStars ? "comparison__star--on" : "comparison__star--off"}`}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                    </svg>
-                  ))}
-                  <span class="comparison__thermal-label">{row.thermal}</span>
-                </div>
-              </td>
-              <td>
-                <span class={`comparison__badge comparison__badge--${row.fireVariant}`}>
-                  {row.fire}
-                </span>
-              </td>
-              <td>
-                <span class="comparison__cost">{row.cost}</span>
-              </td>
-              <td class="comparison__weight">{row.weight}</td>
-              <td class="comparison__use">{row.use}</td>
-            </tr>
-          ))}
+          {
+            rows.map((row) => (
+              <tr>
+                <td>
+                  <span class="comparison__row-name">{row.name}</span>
+                  <span class="comparison__row-sub">{row.sub}</span>
+                </td>
+                <td>
+                  <div class="comparison__stars">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <Star
+                        size={14}
+                        class={`comparison__star ${i < row.thermalStars ? "comparison__star--on" : "comparison__star--off"}`}
+                        fill="currentColor"
+                      />
+                    ))}
+                    <span class="comparison__thermal-label">{row.thermal}</span>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    class={`comparison__badge comparison__badge--${row.fireVariant}`}
+                  >
+                    {row.fire}
+                  </span>
+                </td>
+                <td>
+                  <span class="comparison__cost">{row.cost}</span>
+                </td>
+                <td class="comparison__weight">{row.weight}</td>
+                <td class="comparison__use">{row.use}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
 
     <!-- Tip Box -->
     <div class="comparison__tip reveal reveal-delay-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comparison__tip-icon">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="12" y1="8" x2="12" y2="12"/>
-        <line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
+      <Info size={24} class="comparison__tip-icon" />
       <div>
         <span class="comparison__tip-label">{t.comparison.tipLabel}</span>
         <p class="comparison__tip-text">{t.comparison.tip}</p>
       </div>
     </div>
-
   </div>
 </section>
 

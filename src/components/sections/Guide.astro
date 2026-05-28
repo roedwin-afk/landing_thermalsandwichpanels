@@ -1,4 +1,5 @@
 ---
+import { ArrowRight } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 
@@ -57,6 +58,7 @@ const articles = [
     <div class="guide__grid">
       {articles.map((article, i) => (
         <article class={`guide__card reveal reveal-delay-${i + 1}`}>
+          <a href="#" >
           <div class="guide__card-image">
             <img
               src={article.img}
@@ -70,14 +72,12 @@ const articles = [
               <h3 class="guide__card-title">{article.title}</h3>
               <p class="guide__card-text">{article.text}</p>
             </div>
-            <button class="guide__card-link">
+            <div class="guide__card-link">
               {t.guide.readMore}
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </button>
+              <ArrowRight size={14} />
+            </div>
           </div>
+          </a>
         </article>
       ))}
     </div>

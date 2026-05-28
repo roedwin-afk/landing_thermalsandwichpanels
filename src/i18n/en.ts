@@ -7,6 +7,7 @@ export const en = {
     comparison: "Comparison",
     faq: "FAQ",
     cta: "Get Free Quote",
+    blog: "Blog",
   },
   hero: {
     badge: "Energy Efficiency 2026",

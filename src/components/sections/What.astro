@@ -1,4 +1,5 @@
 ---
+import { Thermometer, Zap, Clock, Shield } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 
@@ -12,7 +13,6 @@ const { t, lang } = Astro.props;
 
 <section id="que-es" class="what">
   <div class="container">
-
     <!-- Header -->
     <div class="what__header reveal">
       <span class="section-label">{t.what.label}</span>
@@ -22,7 +22,6 @@ const { t, lang } = Astro.props;
 
     <!-- Content Grid -->
     <div class="what__grid">
-
       <!-- Left: Image -->
       <div class="what__image-wrap reveal">
         <div class="what__image-deco what__image-deco--tl"></div>
@@ -42,11 +41,7 @@ const { t, lang } = Astro.props;
 
         <div class="what__cards">
           <div class="what__card reveal reveal-delay-1">
-            <div class="what__card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
-              </svg>
-            </div>
+            <div class="what__card-icon"><Thermometer size={20} /></div>
             <div>
               <h4>{t.what.card1Title}</h4>
               <p>{t.what.card1Text}</p>
@@ -54,11 +49,7 @@ const { t, lang } = Astro.props;
           </div>
 
           <div class="what__card reveal reveal-delay-2">
-            <div class="what__card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-            </div>
+            <div class="what__card-icon"><Zap size={20} /></div>
             <div>
               <h4>{t.what.card2Title}</h4>
               <p>{t.what.card2Text}</p>
@@ -66,12 +57,7 @@ const { t, lang } = Astro.props;
           </div>
 
           <div class="what__card reveal reveal-delay-3">
-            <div class="what__card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
+            <div class="what__card-icon"><Clock size={20} /></div>
             <div>
               <h4>{t.what.card3Title}</h4>
               <p>{t.what.card3Text}</p>
@@ -79,11 +65,7 @@ const { t, lang } = Astro.props;
           </div>
 
           <div class="what__card reveal reveal-delay-4">
-            <div class="what__card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
+            <div class="what__card-icon"><Shield size={20} /></div>
             <div>
               <h4>{t.what.card4Title}</h4>
               <p>{t.what.card4Text}</p>
@@ -91,7 +73,6 @@ const { t, lang } = Astro.props;
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
