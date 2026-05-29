@@ -8,6 +8,7 @@ export const en = {
     faq: "FAQ",
     cta: "Get Free Quote",
     blog: "Blog",
+    contact: "Contact",
   },
   hero: {
     badge: "Energy Efficiency 2026",
@@ -199,6 +200,17 @@ export const en = {
     submit: "Send Inquiry",
     successMessage:
       "Thank you! Your request has been successfully registered. We will contact you soon.",
+  },
+  contact_page: {
+    label: "Contact Us",
+    title: "Get In Touch",
+    description: "Have questions about thermal sandwich panels? Our team is here to help with quotes, technical advice, and project support.",
+    phone: "+52 55 9990 3546",
+    phone_label: "Phone",
+    email: "contact@thermalsandwichpanels.com",
+    email_label: "Email",
+    address_label: "Address",
+    address: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
   },
   footer: {
     description:

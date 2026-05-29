@@ -10,6 +10,7 @@ export const es: TranslationKeys = {
     faq: "FAQ",
     cta: "Cotización Gratis",
     blog: "Blog",
+    contact: "Contacto",
   },
   hero: {
     badge: "Eficiencia Energética 2026",
@@ -201,6 +202,17 @@ export const es: TranslationKeys = {
     submit: "Enviar Consulta",
     successMessage:
       "¡Gracias! Tu solicitud ha sido registrada correctamente. Nos pondremos en contacto contigo pronto.",
+  },
+  contact_page: {
+    label: "Contáctanos",
+    title: "Ponte en Contacto",
+    description: "¿Tienes preguntas sobre paneles sándwich térmicos? Nuestro equipo está aquí para ayudarte con cotizaciones, asesoramiento técnico y soporte de proyectos.",
+    phone: "+52 55 9990 3546",
+    phone_label: "Teléfono",
+    email: "contact@thermalsandwichpanels.com",
+    email_label: "Correo",
+    address_label: "Dirección",
+    address: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Ciudad de México, México",
   },
   footer: {
     description:
