@@ -6,7 +6,8 @@ import { Phone, Mail, MapPin } from "lucide-astro";
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
 const t = useTranslations(lang);
-const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
+const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site)
+  .href;
 
 const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
 ---
@@ -32,22 +33,32 @@ const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
             <a href={`tel:${t.contact_page.phone}`} class="contact-detail">
               <span class="contact-detail__icon"><Phone size={18} /></span>
               <div>
-                <span class="contact-detail__label">{t.contact_page.phone_label}</span>
-                <span class="contact-detail__value">{t.contact_page.phone}</span>
+                <span class="contact-detail__label"
+                  >{t.contact_page.phone_label}</span
+                >
+                <span class="contact-detail__value">{t.contact_page.phone}</span
+                >
               </div>
             </a>
             <a href={`mailto:${t.contact_page.email}`} class="contact-detail">
               <span class="contact-detail__icon"><Mail size={18} /></span>
               <div>
-                <span class="contact-detail__label">{t.contact_page.email_label}</span>
-                <span class="contact-detail__value">{t.contact_page.email}</span>
+                <span class="contact-detail__label"
+                  >{t.contact_page.email_label}</span
+                >
+                <span class="contact-detail__value">{t.contact_page.email}</span
+                >
               </div>
             </a>
             <div class="contact-detail">
               <span class="contact-detail__icon"><MapPin size={18} /></span>
               <div>
-                <span class="contact-detail__label">{t.contact_page.address_label}</span>
-                <span class="contact-detail__value">{t.contact_page.address}</span>
+                <span class="contact-detail__label"
+                  >{t.contact_page.address_label}</span
+                >
+                <span class="contact-detail__value"
+                  >{t.contact_page.address}</span
+                >
               </div>
             </div>
           </div>
@@ -129,7 +140,8 @@ const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
                 ></textarea>
               </div>
 
-              <button type="submit" class="form-submit">Enviar Solicitud</button>
+              <button type="submit" class="form-submit">Enviar Solicitud</button
+              >
             </form>
           </div>
         </div>
@@ -138,8 +150,12 @@ const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
   </section>
 </Layout>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
 
 <script is:inline>
   var mapInstance = null;
@@ -165,13 +181,11 @@ const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
       scrollWheelZoom: false,
     });
 
-    L.tileLayer(
-      "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
-      {
-        attribution: '© <a href="https://stadiamaps.com/" style="color:#F59E0B">Stadia Maps</a>',
-        maxZoom: 20,
-      }
-    ).addTo(mapInstance);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright" style="color:#F59E0B">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(mapInstance);
 
     var icon = L.divIcon({
       className: "",
@@ -183,7 +197,7 @@ const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
     L.marker([19.4326, -99.1948], { icon })
       .addTo(mapInstance)
       .bindPopup(
-        '<div style="font-family:\'Inter\',sans-serif;font-size:11px;color:#0B2B4A;line-height:1.6;padding:2px 4px;"><strong style="color:#F59E0B;font-size:12px">Composite Sandwich Panels</strong><br/>Masaryk 61, Int. 901<br/>Polanco V, 11560, CDMX</div>'
+        '<div style="font-family:\'Inter\',sans-serif;font-size:11px;color:#0B2B4A;line-height:1.6;padding:2px 4px;"><strong style="color:#F59E0B;font-size:12px">Composite Sandwich Panels</strong><br/>Masaryk 61, Int. 901<br/>Polanco V, 11560, CDMX</div>',
       )
       .openPopup();
   }
