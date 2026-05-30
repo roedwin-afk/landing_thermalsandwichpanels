@@ -37,15 +37,27 @@ const base = import.meta.env.BASE_URL;
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
 
+    <meta
+      name="keywords"
+      content="thermal sandwich panels, insulated panels, PIR panels, EPS panels, rockwool, sustainable construction, energy efficiency"
+    />
+    <meta name="author" content="Thermal Sandwich Panels" />
+
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Hreflang -->
     <link rel="alternate" hreflang={lang} href={canonicalURL} />
-    {alternateURL && (
-      <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
-    )}
-    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+    {
+      alternateURL && (
+        <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+      )
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={lang === "en" ? canonicalURL : (alternateURL ?? canonicalURL)}
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -80,7 +92,6 @@ const base = import.meta.env.BASE_URL;
     <style is:global>
       /* ── CSS Variables ── */
       :root {
-
         /* Colors */
         --color-primary: #1e3a8a;
         --color-primary-mid: #1d4ed8;
@@ -150,9 +161,12 @@ const base = import.meta.env.BASE_URL;
 
         /* Shadows */
         --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        --shadow-md:
+          0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg:
+          0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --shadow-xl:
+          0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 
         /* Transitions */
@@ -273,12 +287,24 @@ const base = import.meta.env.BASE_URL;
         transform: translateY(0);
       }
 
-      .reveal-delay-1 { transition-delay: 0.1s; }
-      .reveal-delay-2 { transition-delay: 0.2s; }
-      .reveal-delay-3 { transition-delay: 0.3s; }
-      .reveal-delay-4 { transition-delay: 0.4s; }
-      .reveal-delay-5 { transition-delay: 0.5s; }
-      .reveal-delay-6 { transition-delay: 0.6s; }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+      .reveal-delay-5 {
+        transition-delay: 0.5s;
+      }
+      .reveal-delay-6 {
+        transition-delay: 0.6s;
+      }
     </style>
   </body>
 </html>

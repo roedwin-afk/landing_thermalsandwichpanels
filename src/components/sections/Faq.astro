@@ -51,56 +51,98 @@ const items = [
 <script>
   function initFaq() {
     const items = document.querySelectorAll("[data-faq]");
-    if (!items.length) return;
+    const list = document.querySelector(".faq__list") as HTMLElement;
+    if (!items.length || !list) return;
+
+    // Abrir todos temporalmente para medir el alto máximo
+    function fixListHeight() {
+      let maxHeight = 0;
+
+      items.forEach((item) => {
+        const answer = item.querySelector(".faq__answer") as HTMLElement;
+        const question = item.querySelector(".faq__question") as HTMLElement;
+        if (!answer || !question) return;
+
+        // Medir con el item abierto
+        answer.style.transition = "none";
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        const total = (item as HTMLElement).offsetHeight;
+        answer.style.maxHeight = "0px";
+
+        if (total > maxHeight) maxHeight = total;
+      });
+
+      // Alto total = todos los items cerrados + gaps + el item más alto abierto
+      const closedItemsHeight = Array.from(items).reduce((acc, item) => {
+        const question = item.querySelector(".faq__question") as HTMLElement;
+        return acc + (question?.offsetHeight || 0);
+      }, 0);
+
+      const gap = 16; // --space-4
+      const totalGaps = (items.length - 1) * gap;
+
+      list.style.minHeight = closedItemsHeight + totalGaps + maxHeight + "px";
+
+      // Restaurar transiciones
+      requestAnimationFrame(() => {
+        items.forEach((item) => {
+          const answer = item.querySelector(".faq__answer") as HTMLElement;
+          if (answer) answer.style.transition = "";
+        });
+      });
+    }
+
+    function openItem(item: Element) {
+      const btn = item.querySelector(".faq__question") as HTMLButtonElement;
+      const answer = item.querySelector(".faq__answer") as HTMLElement;
+      if (!btn || !answer) return;
+      btn.setAttribute("aria-expanded", "true");
+      item.classList.add("faq__item--open");
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
+
+    function closeItem(item: Element) {
+      const btn = item.querySelector(".faq__question") as HTMLButtonElement;
+      const answer = item.querySelector(".faq__answer") as HTMLElement;
+      if (!btn || !answer) return;
+      answer.style.transition = "none";
+      answer.style.maxHeight = "0px";
+      btn.setAttribute("aria-expanded", "false");
+      item.classList.remove("faq__item--open");
+      requestAnimationFrame(() => {
+        answer.style.transition = "";
+      });
+    }
 
     items.forEach((item) => {
-      // Clonar el botón para eliminar listeners anteriores
-      const oldBtn = item.querySelector(".faq__question");
-      if (!oldBtn) return;
-      const btn = oldBtn.cloneNode(true) as HTMLButtonElement;
-      oldBtn.parentNode?.replaceChild(btn, oldBtn);
-
-      const answer = item.querySelector(".faq__answer") as HTMLElement;
+      const btn = item.querySelector(".faq__question") as HTMLButtonElement;
+      if (!btn || btn.dataset.initialized) return;
+      btn.dataset.initialized = "true";
 
       btn.addEventListener("click", () => {
         const isOpen = item.classList.contains("faq__item--open");
-
-        // Cerrar todos
         items.forEach((other) => {
-          const otherBtn = other.querySelector(".faq__question") as HTMLButtonElement;
-          const otherAnswer = other.querySelector(".faq__answer") as HTMLElement;
-          otherBtn?.setAttribute("aria-expanded", "false");
-          other.classList.remove("faq__item--open");
-          if (otherAnswer) otherAnswer.style.maxHeight = "0px";
+          if (other !== item) closeItem(other);
         });
-
-        // Abrir el actual si estaba cerrado
         if (!isOpen) {
-          btn.setAttribute("aria-expanded", "true");
-          item.classList.add("faq__item--open");
-          if (answer) answer.style.maxHeight = answer.scrollHeight + "px";
+          openItem(item);
+        } else {
+          closeItem(item);
         }
       });
     });
 
-    // Abrir el primero por defecto
-    const first = items[0];
-    if (first) {
-      const btn = first.querySelector(".faq__question") as HTMLButtonElement;
-      const answer = first.querySelector(".faq__answer") as HTMLElement;
-      btn?.setAttribute("aria-expanded", "true");
-      first.classList.add("faq__item--open");
-      if (answer) {
-        // Pequeño delay para que el DOM calcule el scrollHeight correctamente
-        requestAnimationFrame(() => {
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        });
+    // Fijar alto y abrir primero
+    requestAnimationFrame(() => {
+      fixListHeight();
+      if (!items[0].classList.contains("faq__item--open")) {
+        openItem(items[0]);
       }
-    }
+    });
   }
 
+  initFaq();
   document.addEventListener("astro:page-load", initFaq);
-  document.addEventListener("DOMContentLoaded", initFaq);
 </script>
 
 <style>
@@ -144,6 +186,7 @@ const items = [
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    min-height: 420px;
   }
 
   /* Item */
@@ -196,7 +239,7 @@ const items = [
   .faq__answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height var(--transition-slow) ease;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .faq__answer-inner {

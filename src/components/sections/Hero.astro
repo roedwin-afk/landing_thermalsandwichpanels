@@ -81,19 +81,19 @@ const { t, lang } = Astro.props;
         <div class="hero__card-items">
           <div class="hero__card-item">
             <Shield size={16} />
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
             <div>
               <h4>{t.hero.card.item1Title}</h4>
               <p>{t.hero.card.item1Text}</p>
             </div>
           </div>
-          <div class="hero__card-item">
-            <Leaf size={16} />
-            <div>
-              <h4>{t.hero.card.item2Title}</h4>
-              <p>{t.hero.card.item2Text}</p>
-            </div>
+        </div>
+        <div class="hero__card-item">
+          <Leaf size={16} />
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <div>
+            <h4>{t.hero.card.item2Title}</h4>
+            <p>{t.hero.card.item2Text}</p>
           </div>
         </div>
       </div>
@@ -146,6 +146,7 @@ const { t, lang } = Astro.props;
     gap: var(--space-12);
     align-items: center;
     padding-block: var(--space-16);
+    width: 100%;
   }
 
   /* Badge */
@@ -191,7 +192,6 @@ const { t, lang } = Astro.props;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3) var(--space-6);
     margin-top: var(--space-6);
-    max-width: 28rem;
   }
 
   .hero__feature {
@@ -210,14 +210,16 @@ const { t, lang } = Astro.props;
   /* CTAs */
   .hero__ctas {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
+    flex-direction: column;
+    gap: var(--space-3);
     margin-top: var(--space-8);
+    width: 100%;
   }
 
   .hero__cta-primary {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     background-color: var(--color-accent);
     color: var(--color-white);
@@ -225,9 +227,8 @@ const { t, lang } = Astro.props;
     padding: 1rem 2rem;
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25);
-    transition:
-      background-color var(--transition-base),
-      transform var(--transition-base);
+    transition: background-color var(--transition-base), transform var(--transition-base);
+    width: 100%;
   }
 
   .hero__cta-primary:hover {
@@ -236,20 +237,34 @@ const { t, lang } = Astro.props;
   }
 
   .hero__cta-secondary {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--color-white);
     font-weight: var(--font-semibold);
     padding: 1rem 2rem;
     border-radius: var(--radius-lg);
     backdrop-filter: blur(4px);
     transition: background-color var(--transition-base);
+    width: 100%;
   }
 
   .hero__cta-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (min-width: 640px) {
+    .hero__ctas {
+      flex-direction: row;
+      width: auto;
+    }
+
+    .hero__cta-primary,
+    .hero__cta-secondary {
+      width: auto;
+    }
   }
 
   /* Right Card */
