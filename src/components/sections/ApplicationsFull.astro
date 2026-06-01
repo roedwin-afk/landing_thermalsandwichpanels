@@ -1,0 +1,269 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import { ArrowRight } from "lucide-astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t } = Astro.props;
+
+const sectors = [
+  {
+    label: t.applications_page.s1Label,
+    title: t.applications_page.s1Title,
+    description: t.applications_page.s1Description,
+    panel: t.applications_page.s1Panel,
+    uses: [
+      t.applications_page.s1Use1,
+      t.applications_page.s1Use2,
+      t.applications_page.s1Use3,
+      t.applications_page.s1Use4,
+    ],
+    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+    alt: "Industrial warehouse logistics center",
+    accent: false,
+  },
+  {
+    label: t.applications_page.s2Label,
+    title: t.applications_page.s2Title,
+    description: t.applications_page.s2Description,
+    panel: t.applications_page.s2Panel,
+    uses: [
+      t.applications_page.s2Use1,
+      t.applications_page.s2Use2,
+      t.applications_page.s2Use3,
+      t.applications_page.s2Use4,
+    ],
+    img: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&w=800&q=80",
+    alt: "Cold storage refrigerated warehouse",
+    accent: true,
+  },
+  {
+    label: t.applications_page.s3Label,
+    title: t.applications_page.s3Title,
+    description: t.applications_page.s3Description,
+    panel: t.applications_page.s3Panel,
+    uses: [
+      t.applications_page.s3Use1,
+      t.applications_page.s3Use2,
+      t.applications_page.s3Use3,
+      t.applications_page.s3Use4,
+    ],
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    alt: "Modern eco residential housing",
+    accent: false,
+  },
+  {
+    label: t.applications_page.s4Label,
+    title: t.applications_page.s4Title,
+    description: t.applications_page.s4Description,
+    panel: t.applications_page.s4Panel,
+    uses: [
+      t.applications_page.s4Use1,
+      t.applications_page.s4Use2,
+      t.applications_page.s4Use3,
+      t.applications_page.s4Use4,
+    ],
+    img: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=800&q=80",
+    alt: "Agricultural building farm storage",
+    accent: true,
+  },
+  {
+    label: t.applications_page.s5Label,
+    title: t.applications_page.s5Title,
+    description: t.applications_page.s5Description,
+    panel: t.applications_page.s5Panel,
+    uses: [
+      t.applications_page.s5Use1,
+      t.applications_page.s5Use2,
+      t.applications_page.s5Use3,
+      t.applications_page.s5Use4,
+    ],
+    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=800&q=80",
+    alt: "Modern commercial corporate facade building",
+    accent: false,
+  },
+];
+---
+
+<div class="apps">
+  {sectors.map((sector, i) => (
+    <div class={`apps__sector ${i % 2 !== 0 ? "apps__sector--reverse" : ""} reveal`}>
+
+      <!-- Image -->
+      <div class="apps__image-wrap">
+        <img
+          src={sector.img}
+          alt={sector.alt}
+          class="apps__image"
+          loading="lazy"
+        />
+        <span class="apps__sector-label">{sector.label}</span>
+      </div>
+
+      <!-- Content -->
+      <div class="apps__content">
+        <h2 class="apps__sector-title">{sector.title}</h2>
+        <p class="apps__sector-description">{sector.description}</p>
+
+        <ul class="apps__uses">
+          {sector.uses.map((use) => (
+            <li class="apps__use">
+              <ArrowRight size={14} class="apps__use-icon" />
+              {use}
+            </li>
+          ))}
+        </ul>
+
+        <div class="apps__panel-badge">
+          {sector.panel}
+        </div>
+      </div>
+
+    </div>
+  ))}
+</div>
+
+<style>
+  .apps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+  }
+
+  /* Sector row */
+  .apps__sector {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .apps__sector {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+
+    .apps__sector--reverse .apps__image-wrap {
+      order: 2;
+    }
+
+    .apps__sector--reverse .apps__content {
+      order: 1;
+    }
+  }
+
+  /* Image */
+  .apps__image-wrap {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .apps__image {
+    width: 100%;
+    height: 22rem;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .apps__image-wrap:hover .apps__image {
+    transform: scale(1.03);
+  }
+
+  .apps__sector-label {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  /* Content */
+  .apps__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .apps__sector-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: var(--text-2xl);
+    color: var(--color-slate-900);
+    line-height: 1.25;
+  }
+
+  @media (min-width: 640px) {
+    .apps__sector-title {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  .apps__sector-description {
+    font-size: var(--text-sm);
+    color: var(--color-slate-600);
+    line-height: 1.8;
+  }
+
+  @media (min-width: 640px) {
+    .apps__sector-description {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* Use cases list */
+  .apps__uses {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .apps__use {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-slate-700);
+    font-weight: var(--font-medium);
+  }
+
+  .apps__use-icon {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  /* Panel badge */
+  .apps__panel-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-primary-xlight);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary-light);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    width: fit-content;
+    margin-top: var(--space-2);
+  }
+
+  /* Divider between sectors */
+  .apps__sector:not(:last-child) {
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-slate-100);
+  }
+</style>

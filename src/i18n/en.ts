@@ -5,6 +5,7 @@ export const en = {
     benefits: "Benefits",
     guide: "Thickness Guide",
     comparison: "Comparison",
+    applications: "Applications",
     faq: "FAQ",
     cta: "Get Free Quote",
     blog: "Blog",
@@ -158,6 +159,7 @@ export const en = {
   faq: {
     label: "FAQ",
     title: "Answering Your Technical Doubts",
+    viewAll: "View all questions",
     description:
       "Straightforward answers to core architectural and thermal engineering queries.",
     q1: "What thickness of panel should I choose?",
@@ -234,6 +236,141 @@ export const en = {
       "© 2026 Thermal Sandwich Panels. All rights reserved. Designed for optimal thermal conservation.",
     tagline: "Engineered for Efficiency",
     copyrightSuffix: "All rights reserved. Designed for optimal thermal conservation.",
+  },
+  faq_page: {
+    label: "FAQ",
+    title: "Frequently Asked Questions",
+    description: "Everything you need to know about thermal sandwich panels, materials, installation, and pricing.",
+
+    cat1: "General",
+    cat2: "Materials & Specifications",
+    cat3: "Installation & Maintenance",
+    cat4: "Pricing & Sustainability",
+
+    // General
+    q1: "What is a thermal sandwich panel?",
+    a1: "A thermal sandwich panel is a composite structural element consisting of two rigid metal face sheets — usually galvanized steel or aluminum — bonded to a high-density insulating core. The result is a lightweight, load-bearing envelope that provides thermal insulation, weatherproofing, and structural rigidity in a single installation step.",
+
+    q2: "How does it differ from a conventional panel?",
+    a2: "Conventional panels typically provide only structural support or only insulation, requiring separate layers and trades on site. A sandwich panel combines both functions into one prefabricated unit, eliminating thermal bridges, reducing construction time, and lowering the total cost of the building envelope.",
+
+    q3: "How long does a sandwich panel last?",
+    a3: "With proper installation and minimal maintenance, a sandwich panel envelope typically lasts between 30 and 40 years without significant degradation of its thermal or structural performance. The galvanized steel skins protect the insulating core from UV radiation, moisture, and mechanical impact.",
+
+    q4: "Are they suitable for extreme climates?",
+    a4: "Yes. Sandwich panels are engineered for performance across a wide range of climates — from desert heat to arctic cold. The continuous insulating core eliminates thermal bridges, and the interlocking tongue-and-groove joints create an airtight, watertight seal that prevents heat loss, moisture ingress, and condensation even under severe conditions.",
+
+    // Materials & Specifications
+    q5: "What is the difference between PIR, PUR, and EPS?",
+    a5: "PUR (Polyurethane) is the classic insulating foam, offering excellent thermal performance and low cost. PIR (Polyisocyanurate) is a chemically upgraded version of PUR with better fire resistance and slightly superior thermal efficiency — it is the industry standard for commercial and industrial projects. EPS (Expanded Polystyrene) is the most affordable option, lighter and easier to cut, but with lower thermal performance and fire resistance. It is best suited for internal partitions and light-duty applications.",
+
+    q6: "What thickness do I need for my project?",
+    a6: "Thickness depends on your climate zone and intended use. As a general guide: 30–40mm panels cover standard roofing, storage buildings, and internal divisions in mild climates. 50–80mm is the recommended range for modern eco-homes, offices, and medium industrial buildings. 100mm and above is required for cold storage rooms, freezing tunnels, and buildings in regions with extreme temperatures.",
+
+    q7: "What is the U-value and why does it matter?",
+    a7: "The U-value (thermal transmittance) measures how much heat passes through a material per square meter per degree of temperature difference, expressed in W/m²K. The lower the U-value, the better the insulation. Local building codes define maximum U-values for walls and roofs — selecting the right panel thickness ensures compliance and maximizes energy savings.",
+
+    q8: "Are sandwich panels fire resistant?",
+    a8: "It depends on the core material. EPS panels carry a Euroclass E rating, meaning they can ignite and spread flame. PIR panels achieve Euroclass B-s2,d0 — they are self-extinguishing and produce limited smoke. Rockwool (mineral wool) panels reach Class A1, the highest non-combustible rating, making them mandatory for high-risk areas such as boiler rooms, escape routes, and public buildings.",
+
+    q9: "Are sandwich panels waterproof?",
+    a9: "Yes. The interlocking tongue-and-groove joints create a continuous, weather-resistant seal along every panel junction. When correctly installed, the envelope is fully watertight and highly resistant to wind-driven rain, tropical downpours, and ambient humidity. The steel face sheets also act as a vapor barrier, preventing moisture from reaching the insulating core.",
+
+    // Installation & Maintenance
+    q10: "How fast can sandwich panels be installed?",
+    a10: "Significantly faster than traditional masonry or wet construction. A trained installation team can erect a complete industrial building envelope in a fraction of the time — project handovers are typically accelerated by 40 to 50 percent. The panels arrive on site pre-cut to specification, require no drying time, and can be installed in most weather conditions.",
+
+    q11: "Do sandwich panels require maintenance?",
+    a11: "Minimal. The galvanized and pre-painted steel skins are highly resistant to corrosion, UV degradation, and biological growth. Routine inspection of joints and fixings every 5 to 10 years is recommended. Any surface scratches can be treated with compatible touch-up paint to prevent localized corrosion. No structural maintenance is typically required for the first 15 to 20 years.",
+
+    q12: "Can they be installed on existing buildings?",
+    a12: "Yes. Sandwich panels are frequently used for refurbishment and retrofitting projects. They can be fixed over existing cladding, masonry walls, or roof structures using a secondary steel framework, providing a major thermal upgrade without demolishing the existing envelope. This is a cost-effective way to bring older industrial or commercial buildings up to current energy standards.",
+
+    q13: "What tools are needed for installation?",
+    a13: "Installation requires standard construction tools: a forklift or crane for panel handling, a circular saw or nibbler for cutting, a self-drilling screw gun, silicone sealant for joints, and a torque wrench for fixing verification. No specialist equipment is required beyond what a competent steel construction team would already have on site.",
+
+    q14: "Can panels be cut to custom dimensions?",
+    a14: "Yes. Panels can be cut lengthwise and crosswise to suit non-standard openings, irregular roof pitches, or complex facade geometries. Cutting is best done with a low-speed circular saw or nibblers to avoid overheating the core. Factory pre-cutting to exact dimensions is available on request and is recommended for large projects to minimize on-site waste.",
+
+    // Pricing & Sustainability
+    q15: "How much does a sandwich panel cost?",
+    a15: "Pricing varies by core material, thickness, panel finish, and order volume. As a general reference: EPS panels are the most budget-friendly option. PIR panels fall in the mid-to-high range and offer the best cost-to-performance ratio for most commercial projects. Rockwool panels carry a premium price reflecting their superior fire rating. For an accurate quote tailored to your project, use our contact form.",
+
+    q16: "How long does it take to recover the investment?",
+    a16: "For a typical industrial warehouse insulated with 50mm PIR panels, the energy savings generated by reduced heating and cooling loads typically recover the additional insulation investment within 3 to 5 years. After that period, the savings represent a net financial gain for the life of the building. Higher-performance cores and thicker panels in colder climates can achieve payback in as little as 2 years.",
+
+    q17: "Are sandwich panels recyclable?",
+    a17: "Yes. The steel face sheets are fully recyclable through standard metal recycling streams and retain significant material value at end of life. PIR and PUR foam cores can be mechanically recycled or used as fuel in energy recovery processes. Rockwool cores are inert and can be recycled into new mineral wool products. Choosing sandwich panels over traditional construction significantly reduces demolition waste sent to landfill.",
+
+    q18: "Do they help achieve LEED or BREEAM certification?",
+    a18: "Yes. Sandwich panels contribute to multiple credit categories in both LEED and BREEAM frameworks, including Energy and Atmosphere (reduced operational energy), Materials and Resources (recycled content and recyclability), Indoor Environmental Quality (thermal comfort and airtightness), and Innovation credits for prefabricated dry construction. Your project assessor can confirm the specific credit allocation based on panel specification and building type.",
+
+    backToHome: "Back to Home",
+    ctaTitle: "Still have questions?",
+    ctaText: "Our technical team is available to advise you on the best panel specification for your project.",
+    ctaButton: "Contact an Expert",
+  },
+  applications_page: {
+    label: "Applications",
+    title: "Where Thermal Sandwich Panels Excel",
+    description: "From freezing tunnels to corporate facades — discover the ideal panel specification for every construction sector.",
+
+    backToHome: "Back to Home",
+
+    // Sector 1
+    s1Label: "Industrial",
+    s1Title: "Industrial Warehouses & Logistics",
+    s1Description: "Large-scale distribution centers, logistics hubs, and manufacturing plants demand building envelopes that perform under heavy operational loads. Thermal sandwich panels provide the structural strength, thermal stability, and rapid assembly speed that modern industrial construction requires. Their lightweight nature reduces foundation costs while their airtight joints maintain controlled interior environments year-round.",
+    s1Panel: "Recommended: PIR 50–80mm",
+    s1Use1: "Distribution & fulfillment centers",
+    s1Use2: "Manufacturing plants",
+    s1Use3: "Logistics hubs & freight terminals",
+    s1Use4: "Aircraft hangars & vehicle depots",
+
+    // Sector 2
+    s2Label: "Cold Chain",
+    s2Title: "Cold Storage & Food Industry",
+    s2Description: "Maintaining precise temperature ranges is non-negotiable in food processing, pharmaceutical storage, and cold chain logistics. High-thickness PIR and PUR panels deliver the ultra-low U-values required to sustain temperatures from +4°C in chilled rooms down to -40°C in deep-freeze tunnels — all while minimizing refrigeration energy consumption and preventing condensation on structural elements.",
+    s2Panel: "Recommended: PIR/PUR 100mm+",
+    s2Use1: "Refrigerated warehouses & cold rooms",
+    s2Use2: "Food processing & packaging plants",
+    s2Use3: "Pharmaceutical storage facilities",
+    s2Use4: "Ice cream & frozen food tunnels",
+
+    // Sector 3
+    s3Label: "Residential",
+    s3Title: "Residential & Eco-Housing",
+    s3Description: "Modular sandwich panel construction is transforming residential building. Panels arrive on site pre-cut, pre-finished, and ready to assemble — cutting construction timelines by half compared to traditional masonry. The result is a highly insulated, airtight envelope that meets Passive House standards, slashes heating and cooling bills, and can be finished with a wide variety of interior and exterior claddings.",
+    s3Panel: "Recommended: PIR 50–60mm",
+    s3Use1: "Passive & low-energy homes",
+    s3Use2: "Modular & prefabricated housing",
+    s3Use3: "Holiday cabins & garden rooms",
+    s3Use4: "Social housing developments",
+
+    // Sector 4
+    s4Label: "Agriculture",
+    s4Title: "Agricultural Buildings",
+    s4Description: "Livestock buildings, crop storage facilities, and greenhouses face unique environmental challenges: high humidity, aggressive biological activity, and wide daily temperature swings. Sandwich panels with corrosion-resistant coatings and closed-cell foam cores resist moisture, mold, and pest infiltration while maintaining stable interior microclimates that protect both produce and animals.",
+    s4Panel: "Recommended: EPS/PIR 40–60mm",
+    s4Use1: "Livestock & poultry housing",
+    s4Use2: "Grain & crop storage buildings",
+    s4Use3: "Mushroom & horticultural facilities",
+    s4Use4: "Irrigation equipment shelters",
+
+    // Sector 5
+    s5Label: "Commercial",
+    s5Title: "Commercial & Corporate Facades",
+    s5Description: "Architects and developers increasingly specify sandwich wall panels for commercial projects where thermal performance, speed of construction, and design flexibility must coexist. Smooth or micro-ribbed steel facings, available in hundreds of RAL colors and special finishes, allow striking facades that meet both aesthetic ambitions and strict energy codes — without sacrificing build speed or budget predictability.",
+    s5Panel: "Recommended: PIR 60–80mm with architectural finish",
+    s5Use1: "Office buildings & business parks",
+    s5Use2: "Retail centers & shopping malls",
+    s5Use3: "Hotels & hospitality buildings",
+    s5Use4: "Educational & healthcare facilities",
+
+    // CTA
+    ctaTitle: "Not sure which panel fits your project?",
+    ctaText: "Our technical team will analyse your requirements and recommend the optimal panel specification, thickness, and core material for your specific application.",
+    ctaButton: "Get Expert Advice",
   },
 } as const;
 

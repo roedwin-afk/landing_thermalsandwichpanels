@@ -7,7 +7,7 @@ interface Props {
   t: TranslationKeys;
   lang: Lang;
 }
-
+const base = import.meta.env.BASE_URL;
 const { t, lang } = Astro.props;
 ---
 
@@ -58,7 +58,7 @@ const { t, lang } = Astro.props;
 
         <!-- CTA Buttons -->
         <div class="hero__ctas reveal reveal-delay-4">
-          <a href="#contacto" class="hero__cta-primary">
+          <a href={`${base}contact`} class="hero__cta-primary">
             {t.hero.ctaPrimary}
             <ArrowRight size={16} />
           </a>

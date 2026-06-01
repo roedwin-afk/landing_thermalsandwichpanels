@@ -1,0 +1,173 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getLang, useTranslations, getAlternatePath } from "../../i18n/utils";
+import FaqFull from "../../components/sections/FaqFull.astro";
+import { ArrowLeft } from "lucide-astro";
+
+const base = import.meta.env.BASE_URL;
+const lang = getLang(Astro.url, base);
+const t = useTranslations(lang);
+const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
+---
+
+<Layout
+  t={t}
+  lang={lang}
+  alternateURL={alternateURL}
+  title="Preguntas Frecuentes | Paneles Sándwich Térmicos"
+  description="Preguntas frecuentes sobre paneles sándwich térmicos — materiales, espesores, instalación, resistencia al fuego, precios y sostenibilidad."
+>
+  <div class="faq-page">
+
+    <!-- Hero -->
+    <div class="faq-page__hero">
+      <div class="faq-page__hero-radial"></div>
+      <div class="container">
+        <a href={base} class="faq-page__back">
+          <ArrowLeft size={16} />
+          {t.faq_page.backToHome}
+        </a>
+        <span class="section-label">{t.faq_page.label}</span>
+        <h1 class="faq-page__title">{t.faq_page.title}</h1>
+        <p class="faq-page__description">{t.faq_page.description}</p>
+      </div>
+    </div>
+
+    <!-- FAQ Content -->
+    <div class="faq-page__body">
+      <div class="container faq-page__container">
+        <FaqFull t={t} lang={lang} />
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="faq-page__cta">
+      <div class="container">
+        <div class="faq-page__cta-inner">
+          <h2 class="faq-page__cta-title">{t.faq_page.ctaTitle}</h2>
+          <p class="faq-page__cta-text">{t.faq_page.ctaText}</p>
+          <a href={`${base}es/contact`} class="faq-page__cta-btn">
+            {t.faq_page.ctaButton}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+  .faq-page__hero {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-slate-900) 100%
+    );
+    padding-top: 8rem;
+    padding-bottom: var(--space-16);
+    overflow: hidden;
+  }
+
+  .faq-page__hero-radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at top right,
+      rgba(249, 115, 22, 0.1),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  .faq-page__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--color-slate-300);
+    margin-bottom: var(--space-6);
+    transition: color var(--transition-base);
+  }
+
+  .faq-page__back:hover {
+    color: var(--color-white);
+  }
+
+  .faq-page__title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: var(--text-3xl);
+    color: var(--color-white);
+    margin-top: var(--space-2);
+    line-height: 1.2;
+  }
+
+  @media (min-width: 640px) {
+    .faq-page__title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .faq-page__description {
+    color: var(--color-slate-300);
+    font-size: var(--text-base);
+    margin-top: var(--space-4);
+    max-width: 40rem;
+    line-height: 1.75;
+  }
+
+  .faq-page__body {
+    padding-block: var(--space-16);
+    background-color: var(--color-white);
+  }
+
+  .faq-page__cta {
+    background-color: var(--color-slate-50);
+    border-top: 1px solid var(--color-slate-100);
+    padding-block: var(--space-16);
+  }
+
+  .faq-page__cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .faq-page__cta-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: var(--text-2xl);
+    color: var(--color-slate-900);
+  }
+
+  .faq-page__cta-text {
+    color: var(--color-slate-600);
+    font-size: var(--text-sm);
+    line-height: 1.75;
+  }
+
+  .faq-page__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-lg);
+    transition: background-color var(--transition-base), transform var(--transition-base);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+    margin-top: var(--space-2);
+  }
+
+  .faq-page__cta-btn:hover {
+    background-color: var(--color-accent-dark);
+    transform: translateY(-2px);
+  }
+</style>

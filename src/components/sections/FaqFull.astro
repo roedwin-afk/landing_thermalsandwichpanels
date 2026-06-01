@@ -1,0 +1,218 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import { ChevronDown } from "lucide-astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t } = Astro.props;
+
+const categories = [
+  {
+    label: t.faq_page.cat1,
+    items: [
+      { q: t.faq_page.q1, a: t.faq_page.a1 },
+      { q: t.faq_page.q2, a: t.faq_page.a2 },
+      { q: t.faq_page.q3, a: t.faq_page.a3 },
+      { q: t.faq_page.q4, a: t.faq_page.a4 },
+    ],
+  },
+  {
+    label: t.faq_page.cat2,
+    items: [
+      { q: t.faq_page.q5, a: t.faq_page.a5 },
+      { q: t.faq_page.q6, a: t.faq_page.a6 },
+      { q: t.faq_page.q7, a: t.faq_page.a7 },
+      { q: t.faq_page.q8, a: t.faq_page.a8 },
+      { q: t.faq_page.q9, a: t.faq_page.a9 },
+    ],
+  },
+  {
+    label: t.faq_page.cat3,
+    items: [
+      { q: t.faq_page.q10, a: t.faq_page.a10 },
+      { q: t.faq_page.q11, a: t.faq_page.a11 },
+      { q: t.faq_page.q12, a: t.faq_page.a12 },
+      { q: t.faq_page.q13, a: t.faq_page.a13 },
+      { q: t.faq_page.q14, a: t.faq_page.a14 },
+    ],
+  },
+  {
+    label: t.faq_page.cat4,
+    items: [
+      { q: t.faq_page.q15, a: t.faq_page.a15 },
+      { q: t.faq_page.q16, a: t.faq_page.a16 },
+      { q: t.faq_page.q17, a: t.faq_page.a17 },
+      { q: t.faq_page.q18, a: t.faq_page.a18 },
+    ],
+  },
+];
+---
+
+<div class="faq-full">
+
+  {categories.map((cat, catIndex) => (
+    <div class="faq-full__category">
+      <h2 class="faq-full__cat-title">{cat.label}</h2>
+      <div class="faq-full__list">
+        {cat.items.map((item, itemIndex) => (
+          <div class="faq-full__item" id={`faq-${catIndex}-${itemIndex}`}>
+            <button
+              class="faq-full__question"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${catIndex}-${itemIndex}`}
+            >
+              <span>{item.q}</span>
+              <ChevronDown size={18} class="faq-full__chevron" />
+            </button>
+            <div
+              class="faq-full__answer"
+              id={`faq-answer-${catIndex}-${itemIndex}`}
+              role="region"
+            >
+              <p>{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+</div>
+
+<script>
+  function initFaqFull() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".faq-full__question");
+
+    buttons.forEach((btn) => {
+      const newBtn = btn.cloneNode(true) as HTMLButtonElement;
+      btn.parentNode?.replaceChild(newBtn, btn);
+    });
+
+    document.querySelectorAll<HTMLButtonElement>(".faq-full__question").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        const answerId = btn.getAttribute("aria-controls");
+        const answer = answerId ? document.getElementById(answerId) : null;
+
+        // Close all
+        document.querySelectorAll<HTMLButtonElement>(".faq-full__question").forEach((b) => {
+          b.setAttribute("aria-expanded", "false");
+          const id = b.getAttribute("aria-controls");
+          const a = id ? document.getElementById(id) : null;
+          if (a) a.style.maxHeight = "0px";
+        });
+
+        // Open current if it was closed
+        if (!isOpen && answer) {
+          btn.setAttribute("aria-expanded", "true");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+  }
+
+  initFaqFull();
+  document.addEventListener("astro:page-load", initFaqFull);
+</script>
+
+<style>
+  .faq-full {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  /* Category */
+  .faq-full__category {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .faq-full__cat-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+
+  .faq-full__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* Item */
+  .faq-full__item {
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background-color: var(--color-slate-50);
+    transition: border-color var(--transition-base);
+  }
+
+  .faq-full__item:has(.faq-full__question[aria-expanded="true"]) {
+    border-color: var(--color-primary-mid);
+    background-color: var(--color-white);
+  }
+
+  /* Question button */
+  .faq-full__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    text-align: left;
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    color: var(--color-slate-900);
+    background: none;
+    cursor: pointer;
+    transition: color var(--transition-base);
+  }
+
+  .faq-full__question:hover {
+    color: var(--color-primary-mid);
+  }
+
+  .faq-full__question[aria-expanded="true"] {
+    color: var(--color-primary-mid);
+  }
+
+  /* Chevron */
+  .faq-full__chevron {
+    flex-shrink: 0;
+    color: var(--color-slate-400);
+    transition: transform var(--transition-base);
+  }
+
+  .faq-full__question[aria-expanded="true"] .faq-full__chevron {
+    transform: rotate(180deg);
+    color: var(--color-accent);
+  }
+
+  /* Answer */
+  .faq-full__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-full__answer p {
+    padding: 0 var(--space-5) var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-slate-600);
+    line-height: 1.8;
+    border-top: 1px solid var(--color-slate-100);
+    padding-top: var(--space-4);
+  }
+</style>

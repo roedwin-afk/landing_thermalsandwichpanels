@@ -20,7 +20,6 @@ const items = [
 
 <section id="faq" class="faq">
   <div class="container">
-
     <!-- Header -->
     <div class="faq__header reveal">
       <span class="section-label">{t.faq.label}</span>
@@ -30,21 +29,47 @@ const items = [
 
     <!-- Accordion -->
     <div class="faq__list">
-      {items.map((item, i) => (
-        <div class={`faq__item reveal reveal-delay-${i + 1}`} data-faq>
-          <button class="faq__question" aria-expanded="false">
-            <span>{item.q}</span>
-            <ChevronDown size={18} class="faq__icon" />
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">
-              <p>{item.a}</p>
+      {
+        items.map((item, i) => (
+          <div class={`faq__item reveal reveal-delay-${i + 1}`} data-faq>
+            <button class="faq__question" aria-expanded="false">
+              <span>{item.q}</span>
+              <ChevronDown size={18} class="faq__icon" />
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-inner">
+                <p>{item.a}</p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
+    <!-- View All Link -->
+    <div class="faq__footer reveal">
+      <a
+        href={lang === "en"
+          ? `${import.meta.env.BASE_URL}faq`
+          : `${import.meta.env.BASE_URL}es/faq`}
+        class="faq__view-all"
+      >
+        {t.faq.viewAll}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
+            points="12 5 19 12 12 19"></polyline></svg
+        >
+      </a>
+    </div>
   </div>
 </section>
 
@@ -254,5 +279,28 @@ const items = [
     font-size: var(--text-sm);
     line-height: 1.75;
     padding-top: var(--space-5);
+  }
+
+  /* Footer link */
+  .faq__footer {
+    text-align: center;
+    margin-top: var(--space-10);
+  }
+
+  .faq__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-primary-mid);
+    transition:
+      color var(--transition-base),
+      gap var(--transition-base);
+  }
+
+  .faq__view-all:hover {
+    color: var(--color-accent);
+    gap: var(--space-3);
   }
 </style>
