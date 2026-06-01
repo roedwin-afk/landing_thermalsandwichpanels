@@ -14,10 +14,12 @@
     "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/thermalsandwichpanels/ astro build"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.3.8",
     "astro-blog-kit": "^0.2.6",
     "cross-env": "^10.1.0",
-    "lucide-astro": "^0.556.0"
+    "lucide-astro": "^0.556.0",
+    "typescript": "^6.0.3"
   }
 }

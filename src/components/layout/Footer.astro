@@ -2,6 +2,9 @@
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 import { Layers, Linkedin, Twitter, Facebook, Send, Leaf } from "lucide-astro";
+import { Image } from "astro:assets";
+
+import logo from "../../assets/logo.svg";
 
 const year = new Date().getFullYear();
 
@@ -11,6 +14,7 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="footer">
@@ -18,11 +22,17 @@ const { t, lang } = Astro.props;
         <div class="footer__grid">
             <!-- Brand Block -->
             <div class="footer__brand">
-                <a href="#inicio" class="footer__logo">
-                    <div class="footer__logo-icon">
-                        <Layers size={14} />
-                    </div>
-                    <span class="footer__logo-name">THERMAL</span>
+                <a href={base} class="footer__logo">
+                    <Image
+                        src={logo}
+                        alt="Panel sándwich para techo industrial"
+                        width={200}
+                        height={50}
+                        class="footer__logo-img"
+                        format="svg"
+                        quality={85}
+                        loading="eager"
+                    />
                 </a>
                 <p class="footer__description">{t.footer.description}</p>
                 <div class="footer__social">
@@ -216,6 +226,13 @@ const { t, lang } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .footer__logo-img {
+        display: block;
+        height: 3rem;
+        width: auto;
+        filter: brightness(0) invert(1);
     }
 
     .footer__logo-name {

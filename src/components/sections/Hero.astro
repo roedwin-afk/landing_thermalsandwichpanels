@@ -81,19 +81,17 @@ const { t, lang } = Astro.props;
         <div class="hero__card-items">
           <div class="hero__card-item">
             <Shield size={16} />
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
             <div>
               <h4>{t.hero.card.item1Title}</h4>
               <p>{t.hero.card.item1Text}</p>
             </div>
           </div>
-        </div>
-        <div class="hero__card-item">
-          <Leaf size={16} />
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <div>
-            <h4>{t.hero.card.item2Title}</h4>
-            <p>{t.hero.card.item2Text}</p>
+          <div class="hero__card-item">
+            <Leaf size={16} />
+            <div>
+              <h4>{t.hero.card.item2Title}</h4>
+              <p>{t.hero.card.item2Text}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -227,7 +225,9 @@ const { t, lang } = Astro.props;
     padding: 1rem 2rem;
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25);
-    transition: background-color var(--transition-base), transform var(--transition-base);
+    transition:
+      background-color var(--transition-base),
+      transform var(--transition-base);
     width: 100%;
   }
 

@@ -6,7 +6,8 @@ import { Home, ArrowLeft, Search } from "lucide-astro";
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
 const t = useTranslations(lang);
-const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
+const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site)
+  .href;
 ---
 
 <Layout
@@ -22,7 +23,6 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
 
     <div class="container">
       <div class="not-found__inner">
-
         <!-- 404 Number -->
         <div class="not-found__number" aria-hidden="true">404</div>
 
@@ -36,9 +36,11 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
           {lang === "en" ? "Page Not Found" : "Página No Encontrada"}
         </h1>
         <p class="not-found__description">
-          {lang === "en"
-            ? "The page you are looking for doesn't exist or has been moved."
-            : "La página que buscas no existe o ha sido movida."}
+          {
+            lang === "en"
+              ? "The page you are looking for doesn't exist or has been moved."
+              : "La página que buscas no existe o ha sido movida."
+          }
         </p>
 
         <!-- CTAs -->
@@ -47,15 +49,12 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
             <Home size={16} />
             {lang === "en" ? "Back to Home" : "Volver al Inicio"}
           </a>
-          
-            href="javascript:history.back()"
-            class="not-found__btn not-found__btn--secondary"
-          >
-            <ArrowLeft size={16} />
-            {lang === "en" ? "Go Back" : "Regresar"}
-          </a>
-        </div>
 
+          <a href="javascript:history.back()" class="not-found__btn
+          not-found__btn--secondary" >
+          <ArrowLeft size={16} />
+          {lang === "en" ? "Go Back" : "Regresar"}
+        </div>
       </div>
     </div>
   </section>

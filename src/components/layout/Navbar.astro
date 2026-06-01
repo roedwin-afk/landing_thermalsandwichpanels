@@ -5,6 +5,9 @@ import type { Lang } from "../../i18n/utils";
 import { getAlternatePath } from "../../i18n/utils";
 import NavLinks from "../ui/NavLinks.astro";
 import MobileMenu from "./MobileMenu.astro";
+import { Image } from "astro:assets";
+
+import logo from "../../assets/logo.svg";
 
 interface Props {
   t: TranslationKeys;
@@ -23,9 +26,16 @@ const alternateLabel = lang === "en" ? "ES" : "EN";
     <div class="navbar__inner">
       <!-- Logo -->
       <a href={base} class="navbar__logo">
-        <div class="navbar__logo-icon">
-          <Layers size={20} />
-        </div>
+        <Image
+          src={logo}
+          alt="Panel sándwich para techo industrial"
+          width={200}
+          height={50}
+          class="navbar__logo-img"
+          format="svg"
+          quality={85}
+          loading="eager"
+        />
         <div class="navbar__logo-text">
           <span class="navbar__logo-name">THERMAL</span>
           <span class="navbar__logo-sub">Sandwich Panels</span>
@@ -64,7 +74,12 @@ const alternateLabel = lang === "en" ? "ES" : "EN";
 </header>
 
 <!-- Mobile Menu -->
-<MobileMenu t={t} lang={lang} alternatePath={alternatePath} alternateLabel={alternateLabel} />
+<MobileMenu
+  t={t}
+  lang={lang}
+  alternatePath={alternatePath}
+  alternateLabel={alternateLabel}
+/>
 
 <script>
   function initNavbar() {
@@ -205,21 +220,21 @@ const alternateLabel = lang === "en" ? "ES" : "EN";
   }
 
   .lang-switch {
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-slate-700);
-  border: 1px solid var(--color-slate-200);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
-}
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-slate-700);
+    border: 1px solid var(--color-slate-200);
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+  }
 
-.lang-switch:hover {
-  border-color: var(--color-primary-mid);
-  color: var(--color-primary-mid);
-}
+  .lang-switch:hover {
+    border-color: var(--color-primary-mid);
+    color: var(--color-primary-mid);
+  }
 
   /* Burger */
   .navbar__burger {
