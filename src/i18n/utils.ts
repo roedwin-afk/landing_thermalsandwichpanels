@@ -24,3 +24,14 @@ export function getAlternatePath(url: URL, base: string): string {
   }
   return `${base}es/${path}`;
 }
+
+
+export function localizedPath(lang: Lang, path: string, base: string): string {
+  const cleanPath = path.replace(/^\//, "");
+  if (lang === "es") {
+    // Anclajes (#section) apuntan a /es/ + ancla
+    if (cleanPath.startsWith("#")) return `${base}es/${cleanPath}`;
+    return `${base}es/${cleanPath}`;
+  }
+  return `${base}${cleanPath}`;
+}

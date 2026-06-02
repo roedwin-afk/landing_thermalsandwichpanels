@@ -1,0 +1,75 @@
+---
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  type?: "home" | "faq" | "page";
+  title: string;
+  description: string;
+  url: string;
+  faqs?: { q: string; a: string }[];
+}
+
+const { lang, title, description, url, faqs } = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+
+const organization = {
+  "@type": "Organization",
+  "@id": `${site}/#organization`,
+  name: "Thermal Sandwich Panels",
+  url: site,
+  logo: {
+    "@type": "ImageObject",
+    url: `${site}${import.meta.env.BASE_URL}favicon.svg`,
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+52-55-9990-3546",
+    contactType: "sales",
+    availableLanguage: ["English", "Spanish"],
+  },
+};
+
+const webpage = {
+  "@type": "WebPage",
+  "@id": `${url}#webpage`,
+  url,
+  name: title,
+  description,
+  inLanguage: lang === "en" ? "en-US" : "es-ES",
+  isPartOf: { "@id": `${site}/#website` },
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": `${site}/#website`,
+  url: site,
+  name: "Thermal Sandwich Panels",
+  inLanguage: ["en-US", "es-ES"],
+  publisher: { "@id": `${site}/#organization` },
+};
+
+const faqSchema = faqs && faqs.length > 0 ? {
+  "@type": "FAQPage",
+  "@id": `${url}#faqpage`,
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+} : null;
+
+const graphs: object[] = [organization, website, webpage];
+if (faqSchema) graphs.push(faqSchema);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": graphs,
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

@@ -2,6 +2,7 @@
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 import NavLinks from "../ui/NavLinks.astro";
+import { localizedPath } from "../../i18n/utils";
 
 interface Props {
   t: TranslationKeys;
@@ -9,6 +10,8 @@ interface Props {
   alternatePath: string;
   alternateLabel: string;
 }
+
+const base = import.meta.env.BASE_URL;
 
 const { t, lang, alternatePath, alternateLabel } = Astro.props;
 
@@ -22,7 +25,7 @@ const { t, lang, alternatePath, alternateLabel } = Astro.props;
     </nav>
 
     <div class="mobile-menu__footer">
-      <a href="#contacto" class="mobile-menu__cta">
+      <a href={localizedPath(lang, "contact", base)} class="mobile-menu__cta">
         {t.nav.cta}
       </a>
     </div>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://landing.mequipo.com/landings/thermalsandwichpanels/sitemap-index.xml

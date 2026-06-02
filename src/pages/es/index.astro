@@ -8,14 +8,28 @@ import Comparison from "../../components/sections/Comparison.astro";
 import Trust from "../../components/sections/Trust.astro";
 import Faq from "../../components/sections/Faq.astro";
 import { getLang, useTranslations, getAlternatePath } from "../../i18n/utils";
+import JsonLd from "../../components/ui/JsonLd.astro";
 
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
 const t = useTranslations(lang);
-const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
+const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site)
+  .href;
 ---
 
 <Layout t={t} lang={lang} alternateURL={alternateURL}>
+  <JsonLd
+    lang={lang}
+    title={t.hero.title}
+    description={t.hero.subtitle}
+    url={Astro.url.href}
+    faqs={[
+      { q: t.faq.q1, a: t.faq.a1 },
+      { q: t.faq.q2, a: t.faq.a2 },
+      { q: t.faq.q3, a: t.faq.a3 },
+      { q: t.faq.q4, a: t.faq.a4 },
+    ]}
+  />
   <Hero t={t} lang={lang} />
   <What t={t} lang={lang} />
   <Benefits t={t} lang={lang} />

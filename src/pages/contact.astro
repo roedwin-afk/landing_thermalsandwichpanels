@@ -8,7 +8,6 @@ const lang = getLang(Astro.url, base);
 const t = useTranslations(lang);
 const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href;
 
-const coords = { lat: 19.4326, lng: -99.1948 }; // Mexico City coordinates
 ---
 
 <Layout

@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import { getLang, useTranslations, getAlternatePath } from "../../i18n/utils";
 import FaqFull from "../../components/sections/FaqFull.astro";
 import { ArrowLeft } from "lucide-astro";
+import JsonLd from "../../components/ui/JsonLd.astro";
+import { localizedPath } from "../../i18n/utils";
 
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
@@ -17,13 +19,40 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
   title="Preguntas Frecuentes | Paneles Sándwich Térmicos"
   description="Preguntas frecuentes sobre paneles sándwich térmicos — materiales, espesores, instalación, resistencia al fuego, precios y sostenibilidad."
 >
+<JsonLd
+  lang={lang}
+  type="faq"
+  title="Preguntas frecuentes | Paneles sándwich térmicos"
+  description={t.faq_page.description}
+  url={Astro.url.href}
+  faqs={[
+    { q: t.faq_page.q1, a: t.faq_page.a1 },
+    { q: t.faq_page.q2, a: t.faq_page.a2 },
+    { q: t.faq_page.q3, a: t.faq_page.a3 },
+    { q: t.faq_page.q4, a: t.faq_page.a4 },
+    { q: t.faq_page.q5, a: t.faq_page.a5 },
+    { q: t.faq_page.q6, a: t.faq_page.a6 },
+    { q: t.faq_page.q7, a: t.faq_page.a7 },
+    { q: t.faq_page.q8, a: t.faq_page.a8 },
+    { q: t.faq_page.q9, a: t.faq_page.a9 },
+    { q: t.faq_page.q10, a: t.faq_page.a10 },
+    { q: t.faq_page.q11, a: t.faq_page.a11 },
+    { q: t.faq_page.q12, a: t.faq_page.a12 },
+    { q: t.faq_page.q13, a: t.faq_page.a13 },
+    { q: t.faq_page.q14, a: t.faq_page.a14 },
+    { q: t.faq_page.q15, a: t.faq_page.a15 },
+    { q: t.faq_page.q16, a: t.faq_page.a16 },
+    { q: t.faq_page.q17, a: t.faq_page.a17 },
+    { q: t.faq_page.q18, a: t.faq_page.a18 },
+  ]}
+/>
   <div class="faq-page">
 
     <!-- Hero -->
     <div class="faq-page__hero">
       <div class="faq-page__hero-radial"></div>
       <div class="container">
-        <a href={base} class="faq-page__back">
+        <a href={localizedPath(lang, "", base)} class="faq-page__back">
           <ArrowLeft size={16} />
           {t.faq_page.backToHome}
         </a>

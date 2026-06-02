@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import { getLang, useTranslations, getAlternatePath } from "../../i18n/utils";
 import ApplicationsFull from "../../components/sections/ApplicationsFull.astro";
 import { ArrowLeft } from "lucide-astro";
+import JsonLd from "../../components/ui/JsonLd.astro";
+import { localizedPath } from "../../i18n/utils";
 
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
@@ -17,13 +19,20 @@ const alternateURL = new URL(getAlternatePath(Astro.url, base), Astro.site).href
   title="Aplicaciones | Paneles Sándwich Térmicos"
   description="Descubre cómo los paneles sándwich térmicos rinden en naves industriales, cámaras frigoríficas, vivienda ecológica, agricultura y fachadas comerciales."
 >
+<JsonLd
+  lang={lang}
+  type="page"
+  title="Applications | Thermal Sandwich Panels"
+  description={t.applications_page.description}
+  url={Astro.url.href}
+/>
   <div class="apps-page">
 
     <!-- Hero -->
     <div class="apps-page__hero">
       <div class="apps-page__hero-radial"></div>
       <div class="container">
-        <a href={base} class="apps-page__back">
+        <a href={localizedPath(lang, "", base)} class="apps-page__back">
           <ArrowLeft size={16} />
           {t.applications_page.backToHome}
         </a>

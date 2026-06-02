@@ -1,6 +1,7 @@
 ---
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
+import { localizedPath } from "../../i18n/utils";
 
 interface Props {
   t: TranslationKeys;
@@ -19,11 +20,11 @@ const {
 const base = import.meta.env.BASE_URL;
 
 const links = [
-  { href: `${base}applications`, label: t.nav.applications },
-  { href: `${base}#beneficios`,  label: t.nav.benefits },
-  { href: `${base}#comparativa`, label: t.nav.comparison },
-  { href: `${base}faq`,          label: t.nav.faq },
-  { href: `${base}blog`,         label: t.nav.blog },
+  { href: localizedPath(lang, "applications", base), label: t.nav.applications },
+  { href: localizedPath(lang, "#benefits", base),  label: t.nav.benefits },
+  { href: localizedPath(lang, "#comparison", base), label: t.nav.comparison },
+  { href: localizedPath(lang, "faq", base),          label: t.nav.faq },
+  { href: localizedPath(lang, "blog", base),         label: t.nav.blog },
 ];
 ---
 

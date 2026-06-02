@@ -1,8 +1,7 @@
 ---
-import { Layers } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
-import { getAlternatePath } from "../../i18n/utils";
+import { getAlternatePath, localizedPath } from "../../i18n/utils";
 import NavLinks from "../ui/NavLinks.astro";
 import MobileMenu from "./MobileMenu.astro";
 import { Image } from "astro:assets";
@@ -25,7 +24,7 @@ const alternateLabel = lang === "en" ? "ES" : "EN";
   <div class="container">
     <div class="navbar__inner">
       <!-- Logo -->
-      <a href={base} class="navbar__logo">
+      <a href={localizedPath(lang, "", base)} class="navbar__logo">
         <Image
           src={logo}
           alt="Panel sándwich para techo industrial"
@@ -52,7 +51,7 @@ const alternateLabel = lang === "en" ? "ES" : "EN";
         <a href={alternatePath} class="lang-switch">
           {alternateLabel}
         </a>
-        <a href={`${base}contact`} class="btn btn--primary">
+        <a href={localizedPath(lang, "contact", base)} class="btn btn--primary">
           {t.nav.cta}
         </a>
       </div>
