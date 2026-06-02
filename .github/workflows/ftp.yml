@@ -18,6 +18,8 @@ jobs:
       run: npm install
     - name: 🏗 Build Project
       run: npm run build:test
+      env:
+        WP_API_URL: ${{ secrets.WP_API_URL }}
     - name: 🔍 Check Astro types
       run: npm run astro check
       env:
@@ -29,4 +31,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/
-        server-dir: ./landings/thermalsandwichpanels/
+        server-dir: ./landings/panelforinsulation/
